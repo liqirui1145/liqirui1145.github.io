@@ -1,0 +1,59 @@
+# 站点根配置
+baseURL = "https://liqirui1145.github.io/"
+title = "liqirui"
+locale = "zh-CN"
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+enableEmoji = true
+enableRobotsTXT = true
+summaryLength = 40
+
+# 文章默认放在 content/posts 下
+[permalinks]
+  posts = "/posts/:year/:month/:slug/"
+
+[taxonomies]
+  tag = "tags"
+
+[params]
+  author = "liqirui"
+  description = "记录折腾 Linux、shell 和时间同步的那些事。"
+  # 首页的一句话介绍
+  tagline = "代码、系统与时间"
+  # 页脚年份起点
+  since = 2026
+
+# 顶部导航
+[[menus.main]]
+  name = "文章"
+  pageRef = "/posts"
+  weight = 1
+
+[[menus.main]]
+  name = "标签"
+  pageRef = "/tags"
+  weight = 2
+
+[[menus.main]]
+  name = "关于"
+  pageRef = "/about"
+  weight = 3
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # 允许在 Markdown 里直接写 HTML，写博客时方便
+      unsafe = true
+  [markup.highlight]
+    # 内联样式（不需要额外 CSS 文件），配色统一用暗色主题，
+    # 这样浅色/深色模式下代码块都好看
+    noClasses = true
+    style = "monokai"
+    lineNos = false
+    tabWidth = 2
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[minify]
+  minifyOutput = false

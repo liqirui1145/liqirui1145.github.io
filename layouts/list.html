@@ -1,0 +1,13 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{- with .Content -}}
+    <div class="page-intro">{{ . }}</div>
+  {{- end -}}
+  <p class="muted small">共 {{ len .Pages }} 篇</p>
+</header>
+
+{{- $paginator := .Paginate .Pages 15 -}}
+{{- partial "post-list.html" $paginator.Pages -}}
+{{- partial "pagination.html" $paginator -}}
+{{ end }}

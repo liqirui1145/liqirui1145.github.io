@@ -1,0 +1,41 @@
+{{ define "main" }}
+<section class="hero">
+  <h1 class="hero-title">{{ site.Title }}</h1>
+  <p class="hero-tagline">{{ site.Params.tagline }}</p>
+  <p class="hero-desc">{{ site.Params.description }}</p>
+</section>
+
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $paginator := .Paginate $posts 10 -}}
+
+<section class="feed">
+  <h2 class="section-title">
+    最近文章
+    <span class="count">{{ len $posts }}</span>
+  </h2>
+
+  {{- if $paginator.Pages -}}
+    {{- partial "post-list.html" $paginator.Pages -}}
+  {{- else -}}
+    <p class="muted">还没有文章。在 <code>content/posts/</code> 里新建一个 Markdown 文件就能发布。</p>
+  {{- end -}}
+
+  {{- partial "pagination.html" $paginator -}}
+</section>
+
+{{- $tags := site.Taxonomies.tags -}}
+{{- if $tags -}}
+<section class="tagcloud-section">
+  <h2 class="section-title">标签</h2>
+  <ul class="tagcloud">
+    {{- range $tags.ByCount -}}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">
+          {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
+        </a>
+      </li>
+    {{- end -}}
+  </ul>
+</section>
+{{- end -}}
+{{ end }}
