@@ -1,6 +1,6 @@
 # liqirui1145.github.io
 
-个人技术博客，Hugo 生成，托管于 GitHub Pages。
+个人技术博客，Hugo 框架，托管于 GitHub Pages。
 
 ## 本地预览
 
