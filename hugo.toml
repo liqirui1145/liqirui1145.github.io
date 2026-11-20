@@ -1,6 +1,6 @@
 # 站点根配置
 baseURL = "https://liqirui1145.github.io/"
-title = "liqirui"
+title = "大漠胡杨"
 locale = "zh-CN"
 defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
@@ -17,9 +17,9 @@ summaryLength = 40
 
 [params]
   author = "liqirui"
-  description = "记录折腾 Linux、shell 和时间同步的那些事。"
+  description = "记录 Linux、同学和瓜那些事。"
   # 首页的一句话介绍
-  tagline = "代码、系统与时间"
+  tagline = "“生而一千年不死，死而一千年不倒，倒而一千年不朽。”"
   # 页脚年份起点
   since = 2026
 
