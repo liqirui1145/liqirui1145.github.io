@@ -1,0 +1,115 @@
+{{- with site.Params.giscus -}}
+{{- if and .repo .repoid .categoryid -}}
+{{- $g := . -}}
+<section class="comments" id="comments" aria-labelledby="comments-title">
+  <div class="comments-head">
+    <h2 id="comments-title">评论</h2>
+    <a class="comments-link" href="https://github.com/{{ $g.repo }}/discussions" target="_blank" rel="noopener">在 GitHub 上讨论 →</a>
+  </div>
+
+  <div class="comments-body" id="giscus-container"
+       data-repo="{{ $g.repo }}"
+       data-repo-id="{{ $g.repoid }}"
+       data-category="{{ $g.category }}"
+       data-category-id="{{ $g.categoryid }}"
+       data-mapping="{{ $g.mapping | default "pathname" }}"
+       data-strict="{{ $g.strict | default "1" }}"
+       data-reactions-enabled="{{ $g.reactionsenabled | default "1" }}"
+       data-input-position="{{ $g.inputposition | default "top" }}"
+       data-lang="{{ $g.lang | default "zh-CN" }}">
+    <noscript>
+      <p class="muted small">
+        评论由 giscus 提供，需要启用 JavaScript。也可以直接到
+        <a href="https://github.com/{{ $g.repo }}/discussions">GitHub Discussions</a>
+        参与讨论。
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<script>
+(function () {
+  var host = document.getElementById("giscus-container");
+  if (!host) return;
+
+  var loaded = false;
+
+  function currentTheme() {
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  }
+
+  function loadGiscus() {
+    if (loaded) return;
+    loaded = true;
+
+    var script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+
+    var attrs = {
+      "data-repo": host.dataset.repo,
+      "data-repo-id": host.dataset.repoId,
+      "data-category": host.dataset.category,
+      "data-category-id": host.dataset.categoryId,
+      "data-mapping": host.dataset.mapping,
+      "data-strict": host.dataset.strict,
+      "data-reactions-enabled": host.dataset.reactionsEnabled,
+      "data-emit-metadata": "0",
+      "data-input-position": host.dataset.inputPosition,
+      "data-theme": currentTheme(),
+      "data-lang": host.dataset.lang,
+      "data-loading": "lazy"
+    };
+
+    Object.keys(attrs).forEach(function (key) {
+      if (attrs[key]) script.setAttribute(key, attrs[key]);
+    });
+
+    host.appendChild(script);
+  }
+
+  // 评论接近视口时再加载，避免拖慢首屏。
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          loadGiscus();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: "600px 0px" });
+    observer.observe(host);
+  } else {
+    loadGiscus();
+  }
+
+  function syncTheme() {
+    var frame = document.querySelector("iframe.giscus-frame");
+    if (frame && frame.contentWindow) {
+      frame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: currentTheme() } } },
+        "https://giscus.app"
+      );
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (event.origin === "https://giscus.app") syncTheme();
+  });
+
+  new MutationObserver(syncTheme).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"]
+  });
+
+  // iframe 刚创建时可能还没准备好，前几秒补几次主题。
+  var tries = 0;
+  var timer = setInterval(function () {
+    syncTheme();
+    if (++tries > 10) clearInterval(timer);
+  }, 1000);
+})();
+</script>
+{{- end -}}
+{{- end -}}

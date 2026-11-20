@@ -26,6 +26,26 @@ git add -A && git commit -m "post: xxx" && git push
 
 首次使用需要在仓库 **Settings → Pages → Build and deployment → Source** 里选择 **GitHub Actions**。
 
+## 评论
+
+文章页使用 [giscus](https://giscus.app/) 评论，评论数据保存在仓库的 **GitHub Discussions** 里。
+
+- 仓库需要开启 **Discussions**
+- 需要把 **giscus** App 安装到此仓库
+- 配置在 `hugo.toml` 的 `[params.giscus]`：
+  - `repoid`：仓库 GraphQL ID
+  - `categoryid`：Discussions 分类 ID
+  - 这两个值可以在 [giscus.app](https://giscus.app/zh-CN) 的配置器里查到
+- 评论只在 `content/posts/` 的文章页显示，`about` 等页面不显示
+
+## 打印
+
+文章页的“打印本文”按钮调用浏览器打印。打印样式在 `assets/css/main.css` 末尾的 `@media print` 里：
+
+- 隐藏导航、页脚、评论、上下篇和按钮
+- 正文切换为宋体/衬线字体，并自动展开外部链接 URL
+- 代码块、表格、图片避免跨页截断；代码块自动换行
+
 ## 目录结构
 
 ```text
@@ -60,6 +80,7 @@ layouts/
     footer.html       页脚
     post-list.html    文章列表片段
     pagination.html   分页片段
+    comments.html     giscus 评论（按需加载）
 static/
   favicon.svg         站点图标（原样复制）
 hugo.toml             站点配置

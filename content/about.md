@@ -11,7 +11,8 @@ description: "关于这个站和它的作者。"
 
 - 静态生成：[Hugo](https://gohugo.io/)
 - 托管：[GitHub Pages](https://pages.github.com/)
-- 无追踪、无广告、无评论系统
+- 评论：giscus（基于 GitHub Discussions），不额外收集访客信息
+- 无追踪、无广告
 - 全文 RSS：[/index.xml](/index.xml)
 
 ## 联系方式

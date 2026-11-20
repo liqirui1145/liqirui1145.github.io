@@ -1,10 +1,20 @@
 {{ define "main" }}
 <article class="post">
+  <div class="print-header" aria-hidden="true">
+    <div class="print-site">{{ site.Title }} · {{ site.Params.author }}</div>
+    <div class="print-url">
+      {{- if not .Date.IsZero -}}{{ .Date.Format "2006-01-02" }} · {{ end -}}
+      {{ .Permalink }}
+    </div>
+  </div>
+
   <header class="post-head">
     <h1 class="post-title">{{ .Title }}</h1>
     <div class="post-meta">
-      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <span class="dot">·</span>
+      {{- if not .Date.IsZero -}}
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span class="dot">·</span>
+      {{- end -}}
       <span>{{ .ReadingTime }} 分钟</span>
       {{- with .GetTerms "tags" -}}
         <span class="dot">·</span>
@@ -25,21 +35,37 @@
   </div>
 
   <footer class="post-foot">
-    <a class="back-link" href="{{ "posts/" | relURL }}">← 全部文章</a>
-    <nav class="post-nav">
-      {{- with .PrevInSection -}}
-        <a class="post-nav-item prev" href="{{ .RelPermalink }}">
-          <span class="nav-label">← 上一篇</span>
-          <span class="nav-title">{{ .Title }}</span>
-        </a>
+    <div class="post-actions">
+      {{- if eq .Section "posts" -}}
+        <a class="back-link" href="{{ "posts/" | relURL }}">← 全部文章</a>
+      {{- else -}}
+        <a class="back-link" href="{{ site.Home.RelPermalink }}">← 返回首页</a>
       {{- end -}}
-      {{- with .NextInSection -}}
-        <a class="post-nav-item next" href="{{ .RelPermalink }}">
-          <span class="nav-label">下一篇 →</span>
-          <span class="nav-title">{{ .Title }}</span>
-        </a>
+      <button class="print-btn" type="button" data-print>打印本文</button>
+    </div>
+
+    {{- if eq .Section "posts" -}}
+      {{- if or .PrevInSection .NextInSection -}}
+      <nav class="post-nav" aria-label="上一篇和下一篇文章">
+        {{- with .PrevInSection -}}
+          <a class="post-nav-item prev" href="{{ .RelPermalink }}">
+            <span class="nav-label">← 上一篇</span>
+            <span class="nav-title">{{ .Title }}</span>
+          </a>
+        {{- end -}}
+        {{- with .NextInSection -}}
+          <a class="post-nav-item next" href="{{ .RelPermalink }}">
+            <span class="nav-label">下一篇 →</span>
+            <span class="nav-title">{{ .Title }}</span>
+          </a>
+        {{- end -}}
+      </nav>
       {{- end -}}
-    </nav>
+    {{- end -}}
   </footer>
+
+  {{- if eq .Section "posts" -}}
+    {{- partial "comments.html" . -}}
+  {{- end -}}
 </article>
 {{ end }}

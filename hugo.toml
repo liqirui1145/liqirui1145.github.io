@@ -23,6 +23,19 @@ summaryLength = 40
   # 页脚年份起点
   since = 2026
 
+# 评论：giscus（基于 GitHub Discussions）
+# 安装 giscus App、开启 Discussions 后，把仓库 ID 和分类 ID 填在这里。
+[params.giscus]
+  repo = "liqirui1145/liqirui1145.github.io"
+  repoid = "R_kgDOVuOtNA"
+  category = "Announcements"
+  categoryid = "DIC_kwDOVuOtNM4DLl6j"
+  mapping = "pathname"
+  strict = "1"
+  reactionsenabled = "1"
+  inputposition = "top"
+  lang = "zh-CN"
+
 # 顶部导航
 [[menus.main]]
   name = "文章"
