@@ -4,6 +4,8 @@
   <h1>{{ .Title }}</h1>
   {{- with .Content -}}
     <div class="page-intro">{{ . }}</div>
+  {{- else -}}
+    {{- with .Description -}}<div class="page-intro">{{ . }}</div>{{- end -}}
   {{- end -}}
   <p class="page-count">共 {{ len .Data.Terms }} 个标签</p>
 </header>
