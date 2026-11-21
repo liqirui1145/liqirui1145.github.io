@@ -8,11 +8,12 @@
   <p class="page-count">共 {{ len .Data.Terms }} 个标签</p>
 </header>
 
-<ul class="tagcloud tagcloud-page">
+<ul class="tag-grid">
   {{- range .Data.Terms.ByCount -}}
     <li>
-      <a href="{{ .Page.RelPermalink }}">
-        {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
+      <a class="tag-card" href="{{ .Page.RelPermalink }}">
+        <span class="tag-card-name">#{{ .Page.LinkTitle }}</span>
+        <span class="tag-card-count">{{ .Count }} 篇</span>
       </a>
     </li>
   {{- end -}}

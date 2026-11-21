@@ -814,6 +814,56 @@ a.tag:hover { background: var(--accent); color: var(--on-accent); }
   background: var(--card);
 }
 
+.tag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+  max-width: var(--wrap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.tag-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border));
+  box-shadow: var(--shadow-hover);
+}
+
+.tag-card-name {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: .94rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag-card:hover .tag-card-name { color: var(--accent); }
+
+.tag-card-count {
+  flex: 0 0 auto;
+  padding: .1rem .5rem;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-faint);
+  font-size: .72rem;
+}
+
 /* ---------- 列表页 / 普通页 ---------- */
 .page-main {
   padding-top: calc(var(--header-h) + 52px);
@@ -1067,7 +1117,8 @@ a.tag:hover { background: var(--accent); color: var(--on-accent); }
   border-radius: 5px;
   background: var(--bg-soft);
   font-size: .86em;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* 代码块 */
@@ -1141,6 +1192,11 @@ a.tag:hover { background: var(--accent); color: var(--on-accent); }
 .prose mark {
   padding: .05em .2em;
   border-radius: 4px;
+}
+
+[data-theme="dark"] .prose mark {
+  background: #3a2a16 !important;
+  color: var(--text) !important;
 }
 
 /* ---------- 文章页脚 ---------- */
@@ -1837,6 +1893,24 @@ a.tag:hover { background: var(--accent); color: var(--on-accent); }
     font-size: 8.5pt;
   }
   .tag-count { color: #555; }
+
+  .tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    max-width: none;
+  }
+  .tag-card {
+    padding: .2rem .45rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .tag-card-name { font-size: 9pt; white-space: normal; }
+  .tag-card-count { padding: 0; background: none; font-size: 8pt; }
 
   .notfound {
     padding: 0;
