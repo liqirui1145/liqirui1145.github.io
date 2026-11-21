@@ -1,13 +1,14 @@
 {{ define "main" }}
 <header class="page-head">
+  <p class="eyebrow">TAGS</p>
   <h1>{{ .Title }}</h1>
   {{- with .Content -}}
     <div class="page-intro">{{ . }}</div>
   {{- end -}}
-  <p class="muted small">共 {{ len .Data.Terms }} 个标签</p>
+  <p class="page-count">共 {{ len .Data.Terms }} 个标签</p>
 </header>
 
-<ul class="tagcloud">
+<ul class="tagcloud tagcloud-page">
   {{- range .Data.Terms.ByCount -}}
     <li>
       <a href="{{ .Page.RelPermalink }}">

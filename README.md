@@ -40,11 +40,20 @@ git add -A && git commit -m "post: xxx" && git push
 
 ## 打印
 
-文章页的“打印本文”按钮调用浏览器打印。打印样式在 `assets/css/main.css` 末尾的 `@media print` 里：
+在文章页直接按 **Ctrl+P**（或点“打印本文”）即可。打印样式在 `assets/css/main.css` 末尾的 `@media print` 里：
 
-- 隐藏导航、页脚、评论、上下篇和按钮
-- 正文切换为宋体/衬线字体，并自动展开外部链接 URL
-- 代码块、表格、图片避免跨页截断；代码块自动换行
+- 全站正文、标题、打印区域统一使用 **微软雅黑**；代码保留等宽字体
+- 隐藏页头、页脚、评论、侧栏目录、上下篇和按钮
+- 自动展开外部链接 URL，正文两端对齐，A4 页边距
+- 代码块、表格、图片避免跨页截断；代码块自动换行，背景强制为浅色
+- 首页和文章列表打印为紧凑索引，只保留日期、标题、标签
+
+## 页面结构
+
+- 首页：全宽沙漠头图 + 个人资料卡 + 文章卡片列表
+- 文章页：文章卡片 + 右侧本文目录（自动高亮）+ 评论区
+- 全站使用微软雅黑，支持浅色/深色主题；深色主题下评论区同步切换
+- 头图使用本地 SVG（`static/hero-desert.svg`），不依赖外部图片
 
 ## 目录结构
 
@@ -65,11 +74,11 @@ content/
   tags/
     _index.md         标签页说明
 layouts/
-  baseof.html         页面骨架
-  home.html           首页（文章列表 + 分页）
+  baseof.html         页面骨架（首页/文章页/普通页布局）
+  home.html           首页（头图 + 文章卡片 + 侧栏）
   home.rss.xml        首页 RSS 模板
   list.html           列表页（分区）
-  single.html         文章页
+  single.html         文章页（正文 + 目录 + 评论）
   taxonomy.html       标签总览页
   term.html           单个标签下的文章页
   404.html            404 页面
@@ -83,5 +92,6 @@ layouts/
     comments.html     giscus 评论（按需加载）
 static/
   favicon.svg         站点图标（原样复制）
+  hero-desert.svg     首页沙漠头图（本地 SVG）
 hugo.toml             站点配置
 ```

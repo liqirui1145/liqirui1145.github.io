@@ -1,17 +1,21 @@
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <p>
-      {{- if eq (printf "%v" site.Params.since) (now.Format "2006") -}}
-        © {{ site.Params.since }}
-      {{- else -}}
-        © {{ site.Params.since }}–{{ now.Format "2006" }}
-      {{- end }}
-      {{ site.Params.author }}
-      <span class="sep">·</span>
-      <a href="{{ "index.xml" | relURL }}">RSS</a>
-      <span class="sep">·</span>
-      <a href="https://github.com/liqirui1145">GitHub</a>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true">胡</span>
+      <span>
+        <strong>{{ site.Title }}</strong>
+        <small>{{ site.Params.description }}</small>
+      </span>
+    </div>
+
+    <p class="footer-copy">
+      © {{ site.Params.since }}{{ if ne (printf "%v" site.Params.since) (now.Format "2006") }}–{{ now.Format "2006" }}{{ end }}
+      {{ site.Params.author }} · 由 Hugo 构建，托管于 GitHub Pages
     </p>
-    <p class="muted small">由 Hugo 构建，托管于 GitHub Pages</p>
+
+    <div class="footer-links">
+      <a href="{{ "index.xml" | relURL }}">RSS</a>
+      <a href="https://github.com/liqirui1145" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
 </footer>

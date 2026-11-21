@@ -5,9 +5,6 @@ date: 2026-11-21T14:45:00+08:00
 description: "非常屌的软件，可以作用于Windows和macOS，让deepseek代替你操作计算机去干活，还是深度求索官方出的！"
 tags: ["Deepseek"]
 ---
-# 怎么安装DSH
-
-非常屌的软件，可以作用于Windows和macOS，让deepseek代替你操作计算机去干活，还是深度求索官方出的！
 
 **屌不屌？屌！**
 

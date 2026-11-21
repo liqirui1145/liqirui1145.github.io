@@ -1,41 +1,77 @@
 {{ define "main" }}
-<section class="hero">
-  <h1 class="hero-title">{{ site.Title }}</h1>
-  <p class="hero-tagline">{{ site.Params.tagline }}</p>
-  <p class="hero-desc">{{ site.Params.description }}</p>
-</section>
-
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- $paginator := .Paginate $posts 10 -}}
-
-<section class="feed">
-  <h2 class="section-title">
-    最近文章
-    <span class="count">{{ len $posts }}</span>
-  </h2>
-
-  {{- if $paginator.Pages -}}
-    {{- partial "post-list.html" $paginator.Pages -}}
-  {{- else -}}
-    <p class="muted">还没有文章。在 <code>content/posts/</code> 里新建一个 Markdown 文件就能发布。</p>
-  {{- end -}}
-
-  {{- partial "pagination.html" $paginator -}}
-</section>
-
 {{- $tags := site.Taxonomies.tags -}}
-{{- if $tags -}}
-<section class="tagcloud-section">
-  <h2 class="section-title">标签</h2>
-  <ul class="tagcloud">
-    {{- range $tags.ByCount -}}
-      <li>
-        <a href="{{ .Page.RelPermalink }}">
-          {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
-        </a>
-      </li>
-    {{- end -}}
-  </ul>
+
+<section class="home-hero">
+  <img class="hero-bg" src="{{ "hero-desert.svg" | relURL }}" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">DESERT POPLAR · NOTES</p>
+    <h1 class="hero-title">{{ site.Title }}</h1>
+    <p class="hero-tagline">{{ site.Params.tagline }}</p>
+    <p class="hero-desc">{{ site.Params.description }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#latest">浏览文章</a>
+      <a class="btn btn-ghost" href="https://github.com/liqirui1145" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#latest" aria-label="跳到文章列表"><span></span></a>
 </section>
-{{- end -}}
+
+<div class="home-shell" id="latest">
+  <div class="print-header home-print-head" aria-hidden="true">
+    <div class="print-site">{{ site.Title }} · {{ site.Params.author }}</div>
+    <div class="print-url">{{ site.Home.Permalink }}</div>
+  </div>
+
+  <section class="feed">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">LATEST POSTS</p>
+        <h2>最近文章</h2>
+      </div>
+      <span class="section-count">{{ len $posts }} 篇</span>
+    </div>
+
+    {{- if $paginator.Pages -}}
+      {{- partial "post-list.html" $paginator.Pages -}}
+    {{- else -}}
+      <p class="muted">还没有文章。在 <code>content/posts/</code> 里新建一个 Markdown 文件就能发布。</p>
+    {{- end -}}
+
+    {{- partial "pagination.html" $paginator -}}
+  </section>
+
+  <aside class="home-side">
+    <div class="side-card profile-card">
+      <div class="avatar" aria-hidden="true">胡</div>
+      <h3>{{ site.Params.author }}</h3>
+      <p class="profile-desc">{{ site.Params.description }}</p>
+      <div class="profile-stats">
+        <div><strong>{{ len $posts }}</strong><span>文章</span></div>
+        <div><strong>{{ len $tags }}</strong><span>标签</span></div>
+      </div>
+      <div class="profile-links">
+        <a href="https://github.com/liqirui1145" target="_blank" rel="noopener">GitHub</a>
+        <a href="{{ "index.xml" | relURL }}">RSS</a>
+      </div>
+    </div>
+
+    {{- if $tags -}}
+    <div class="side-card">
+      <h3 class="side-title">标签</h3>
+      <ul class="tagcloud">
+        {{- range first 12 $tags.ByCount -}}
+          <li>
+            <a href="{{ .Page.RelPermalink }}">
+              {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
+            </a>
+          </li>
+        {{- end -}}
+      </ul>
+    </div>
+    {{- end -}}
+  </aside>
+</div>
 {{ end }}
