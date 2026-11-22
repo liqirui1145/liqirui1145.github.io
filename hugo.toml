@@ -58,9 +58,9 @@ summaryLength = 40
       # 允许在 Markdown 里直接写 HTML，写博客时方便
       unsafe = true
   [markup.highlight]
-    # 内联样式（不需要额外 CSS 文件），配色统一用暗色主题，
-    # 这样浅色/深色模式下代码块都好看
-    noClasses = true
+    # 使用 class 输出，代码配色由 main.css 的 .chroma 控制，
+    # 让代码块跟随页面的 --bg-soft / --text / --accent。
+    noClasses = false
     style = "monokai"
     lineNos = false
     tabWidth = 2

@@ -17,11 +17,13 @@
       {{- end -}}
 
       <div class="post-card-foot">
+        {{- with .Params.tags -}}
         <span class="post-card-tags">
-          {{- range first 3 .Params.tags -}}
+          {{- range first 3 . -}}
             <span class="tag">#{{ . }}</span>
           {{- end -}}
         </span>
+        {{- end -}}
         <span class="post-card-more">阅读全文 <span aria-hidden="true">→</span></span>
       </div>
     </a>

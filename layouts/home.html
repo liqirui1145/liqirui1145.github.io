@@ -1,24 +1,11 @@
 {{ define "main" }}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- $paginator := .Paginate $posts 10 -}}
-{{- $tags := site.Taxonomies.tags -}}
 
-<section class="home-hero">
-  <img class="hero-bg" src="{{ "hero-desert.svg" | relURL }}" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
-  <div class="hero-shade" aria-hidden="true"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">DESERT POPLAR · NOTES</p>
-    <h1 class="hero-title">{{ site.Title }}</h1>
-    <p class="hero-tagline">{{ site.Params.tagline }}</p>
-    <p class="hero-desc">{{ site.Params.description }}</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#latest">浏览文章</a>
-      <a class="btn btn-ghost" href="https://github.com/liqirui1145" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </div>
-  <a class="hero-scroll" href="#latest" aria-label="跳到文章列表"><span></span></a>
-</section>
+<!-- 无障碍：hero 删除后保留一个屏幕阅读器 H1 -->
+<h1 class="sr-only">{{ site.Title }}</h1>
 
+<!-- 删除：首页不需要 hero，标语移到文章列表上方 -->
 <div class="home-shell" id="latest">
   <div class="print-header home-print-head" aria-hidden="true">
     <div class="print-site">{{ site.Title }} · {{ site.Params.author }}</div>
@@ -26,6 +13,8 @@
   </div>
 
   <section class="feed">
+    <p class="feed-tagline">{{ site.Params.tagline }}</p>
+
     <div class="section-head">
       <div>
         <p class="eyebrow">LATEST POSTS</p>
@@ -42,36 +31,5 @@
 
     {{- partial "pagination.html" $paginator -}}
   </section>
-
-  <aside class="home-side">
-    <div class="side-card profile-card">
-      <div class="avatar" aria-hidden="true">胡</div>
-      <h3>{{ site.Params.author }}</h3>
-      <p class="profile-desc">{{ site.Params.description }}</p>
-      <div class="profile-stats">
-        <div><strong>{{ len $posts }}</strong><span>文章</span></div>
-        <div><strong>{{ len $tags }}</strong><span>标签</span></div>
-      </div>
-      <div class="profile-links">
-        <a href="https://github.com/liqirui1145" target="_blank" rel="noopener">GitHub</a>
-        <a href="{{ "index.xml" | relURL }}">RSS</a>
-      </div>
-    </div>
-
-    {{- if $tags -}}
-    <div class="side-card">
-      <h3 class="side-title">标签</h3>
-      <ul class="tagcloud">
-        {{- range first 12 $tags.ByCount -}}
-          <li>
-            <a href="{{ .Page.RelPermalink }}">
-              {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
-            </a>
-          </li>
-        {{- end -}}
-      </ul>
-    </div>
-    {{- end -}}
-  </aside>
 </div>
 {{ end }}

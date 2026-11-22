@@ -1,4 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="liqirui">
-  <rect width="64" height="64" rx="15" fill="#2f6feb"/>
-  <circle cx="32" cy="32" r="9.5" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="大漠胡杨">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8dfae"/>
+      <stop offset="0.5" stop-color="#e9a75d"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6dc"/>
+      <stop offset="0.65" stop-color="#ffd98c"/>
+      <stop offset="1" stop-color="#f0b15b"/>
+    </radialGradient>
+    <linearGradient id="duneBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a451e"/>
+      <stop offset="1" stop-color="#5a3214"/>
+    </linearGradient>
+    <linearGradient id="duneFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c2a12"/>
+      <stop offset="1" stop-color="#2d190b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" fill="url(#sky)"/>
+  <circle cx="32" cy="25" r="11" fill="url(#sun)"/>
+  <path d="M0 50 C 16 43 30 49 45 45 C 54 42 60 44 64 44 L64 64 L0 64 Z" fill="url(#duneBack)"/>
+  <path d="M0 57 C 20 51 38 56 52 54 C 58 53 62 54 64 54 L64 64 L0 64 Z" fill="url(#duneFront)"/>
 </svg>

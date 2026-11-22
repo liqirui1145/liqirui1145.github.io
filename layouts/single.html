@@ -3,7 +3,7 @@
 {{- $hasToc := and $isPost (strings.Contains .TableOfContents "<li>") -}}
 
 {{- if $isPost -}}
-<div class="post-layout">
+<div class="post-layout{{ if not $hasToc }} post-layout--single{{ end }}">
   <div class="post-column">
 {{- end -}}
 
@@ -14,14 +14,7 @@
       </div>
 
       <header class="post-head">
-        {{- if $isPost -}}
-        <nav class="breadcrumb" aria-label="面包屑">
-          <a href="{{ "posts/" | relURL }}">文章</a>
-          <span aria-hidden="true">/</span>
-          <span>{{ .Title }}</span>
-        </nav>
-        {{- end -}}
-
+        <!-- 删除：面包屑末段就是下方 h1，重复信息不再展示 -->
         <h1 class="post-title">{{ .Title }}</h1>
 
         {{- with .Description -}}
@@ -87,50 +80,19 @@
     </article>
 
 {{- if $isPost -}}
-    {{ partial "comments.html" . }}
   </div>
 
+  {{- if $hasToc -}}
   <aside class="post-side">
-    {{- if $hasToc -}}
     <div class="side-card toc-card">
       <h2 class="side-title">本文目录</h2>
       {{ .TableOfContents }}
     </div>
-    {{- end -}}
-
-    <div class="side-card post-info-card">
-      <h2 class="side-title">文章信息</h2>
-      <dl class="post-info">
-        {{- if not .Date.IsZero -}}
-        <div><dt>发布</dt><dd>{{ .Date.Format "2006-01-02" }}</dd></div>
-        {{- end -}}
-        <div><dt>阅读</dt><dd>{{ .ReadingTime }} 分钟</dd></div>
-        {{- with .GetTerms "tags" -}}
-        <div>
-          <dt>标签</dt>
-          <dd class="post-info-tags">
-            {{- range . -}}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{- end -}}
-          </dd>
-        </div>
-        {{- end -}}
-      </dl>
-    </div>
-
-    {{- with site.Taxonomies.tags -}}
-    <div class="side-card">
-      <h2 class="side-title">标签</h2>
-      <ul class="tagcloud">
-        {{- range first 8 .ByCount -}}
-          <li>
-            <a href="{{ .Page.RelPermalink }}">
-              {{ .Page.LinkTitle }}<span class="tag-count">{{ .Count }}</span>
-            </a>
-          </li>
-        {{- end -}}
-      </ul>
-    </div>
-    {{- end -}}
   </aside>
+  {{- end -}}
 </div>
+
+<!-- 删除：文章信息与标签云重复/低价值，侧栏只保留目录；评论移到正文下方通栏 -->
+{{ partial "comments.html" . }}
 {{- end -}}
 {{ end }}
