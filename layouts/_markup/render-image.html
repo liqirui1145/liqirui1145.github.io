@@ -23,7 +23,7 @@
     {{- $srcset = $srcset | append (printf "%s %dw" $full.RelPermalink $w) -}}
   {{- end -}}
   <figure class="post-figure">
-    <img src="{{ $img.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="(max-width: 47.5rem) 100vw, 37.25rem" width="{{ $w }}" height="{{ $h }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+    <img src="{{ $img.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="(max-width: 47.5rem) 100vw, 40rem" width="{{ $w }}" height="{{ $h }}" alt="{{ $alt }}" loading="lazy" decoding="async">
     {{- with $alt -}}<figcaption>{{ . }}</figcaption>{{- end -}}
   </figure>
 {{- else -}}

@@ -1,8 +1,6 @@
 {{ define "main" }}
 <header class="page-head">
-  <p class="eyebrow">TAG</p>
   <h1>#{{ .Title }}</h1>
-  <p class="page-count">共 {{ len .Pages }} 篇</p>
 </header>
 
 {{- $paginator := .Paginate .Pages 15 -}}

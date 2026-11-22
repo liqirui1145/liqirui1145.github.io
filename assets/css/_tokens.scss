@@ -1,0 +1,54 @@
+// 设计 token：只在这里定义颜色、间距、字号、圆角。
+:root {
+  /* 6 个颜色角色：纸、墨、两级灰、线、一个强调色 */
+  --paper: #f5f1ea;
+  --ink: #211e19;
+  --ink-soft: #5e574d;
+  --ink-faint: #6b6359;
+  --rule: #e3dccf;
+  --accent: #b45309;
+
+  /* 6 级间距：4 / 8 / 12 / 24 / 48 / 96 */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 24px;
+  --s5: 48px;
+  --s6: 96px;
+
+  /* 5 级字号：12 / 17 / 24 / 38 / 72，最大/最小 = 6 */
+  --fs-1: .75rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.5rem;
+  --fs-4: 2.375rem;
+  --fs-5: 4.5rem;
+
+  /* 控件 / 容器两个圆角；当前方向是无圆角，所以都为 0 */
+  --r-control: 0;
+  --r-container: 0;
+
+  --hairline: 1px;
+
+  /* 字体：正文用中文宋体栈，界面用中文系统无衬线，等宽用于日期/代码 */
+  --font-body: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  --font-ui: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+  /* 打印样式仍引用旧名，统一指向新字体 token */
+  --sans: var(--font-ui);
+
+  --measure: 40rem;
+  --wrap-wide: 70rem;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  /* 同一组颜色角色，暖灰底，强调色仍然只有一个 */
+  --paper: #12100d;
+  --ink: #eee9df;
+  --ink-soft: #b6aea1;
+  --ink-faint: #8b8275;
+  --rule: #2e2821;
+  --accent: #f0b35e;
+  color-scheme: dark;
+}

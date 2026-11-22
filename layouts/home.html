@@ -2,34 +2,22 @@
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- $paginator := .Paginate $posts 10 -}}
 
-<!-- 无障碍：hero 删除后保留一个屏幕阅读器 H1 -->
 <h1 class="sr-only">{{ site.Title }}</h1>
 
-<!-- 删除：首页不需要 hero，标语移到文章列表上方 -->
 <div class="home-shell" id="latest">
   <div class="print-header home-print-head" aria-hidden="true">
     <div class="print-site">{{ site.Title }} · {{ site.Params.author }}</div>
     <div class="print-url">{{ site.Home.Permalink }}</div>
   </div>
 
-  <section class="feed">
-    <p class="feed-tagline">{{ site.Params.tagline }}</p>
+  <p class="home-note">{{ site.Params.tagline }}</p>
 
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">LATEST POSTS</p>
-        <h2>最近文章</h2>
-      </div>
-      <span class="section-count">{{ len $posts }} 篇</span>
-    </div>
+  {{- if $paginator.Pages -}}
+    {{- partial "post-list.html" $paginator.Pages -}}
+  {{- else -}}
+    <p class="muted">还没有文章。在 <code>content/posts/</code> 里新建一个 Markdown 文件就能发布。</p>
+  {{- end -}}
 
-    {{- if $paginator.Pages -}}
-      {{- partial "post-list.html" $paginator.Pages -}}
-    {{- else -}}
-      <p class="muted">还没有文章。在 <code>content/posts/</code> 里新建一个 Markdown 文件就能发布。</p>
-    {{- end -}}
-
-    {{- partial "pagination.html" $paginator -}}
-  </section>
+  {{- partial "pagination.html" $paginator -}}
 </div>
 {{ end }}

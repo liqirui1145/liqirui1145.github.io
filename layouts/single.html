@@ -14,7 +14,6 @@
       </div>
 
       <header class="post-head">
-        <!-- 删除：面包屑末段就是下方 h1，重复信息不再展示 -->
         <h1 class="post-title">{{ .Title }}</h1>
 
         {{- with .Description -}}
@@ -23,28 +22,24 @@
 
         {{- if $isPost -}}
         <div class="post-byline">
-          <span class="avatar avatar-sm" aria-hidden="true">胡</span>
-          <div class="byline-text">
-            <span class="byline-name">{{ site.Params.author }}</span>
-            <span class="byline-meta">
-              {{- if not .Date.IsZero -}}
-                <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
-                <span class="dot">·</span>
-              {{- end -}}
-              <span>{{ .ReadingTime }} 分钟阅读</span>
-            </span>
-          </div>
+          <span class="byline-name">{{ site.Params.author }}</span>
+          <span class="dot" aria-hidden="true">·</span>
+          <span class="byline-meta">
+            {{- if not .Date.IsZero -}}
+              <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{- end -}}
+          </span>
         </div>
 
         {{- with .GetTerms "tags" -}}
         <div class="post-tags">
-          {{- range . -}}<a class="tag" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{- end -}}
+          {{- range . -}}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{- end -}}
         </div>
         {{- end -}}
         {{- end -}}
       </header>
 
-      <div class="prose">
+      <div class="post-body prose">
         {{ .Content }}
       </div>
 
@@ -85,14 +80,13 @@
   {{- if $hasToc -}}
   <aside class="post-side">
     <div class="side-card toc-card">
-      <h2 class="side-title">本文目录</h2>
+      <h2 class="side-title">目录</h2>
       {{ .TableOfContents }}
     </div>
   </aside>
   {{- end -}}
 </div>
 
-<!-- 删除：文章信息与标签云重复/低价值，侧栏只保留目录；评论移到正文下方通栏 -->
 {{ partial "comments.html" . }}
 {{- end -}}
 {{ end }}

@@ -1,21 +1,19 @@
 {{ define "main" }}
 <header class="page-head">
-  <p class="eyebrow">TAGS</p>
   <h1>{{ .Title }}</h1>
   {{- with .Content -}}
     <div class="page-intro">{{ . }}</div>
   {{- else -}}
-    {{- with .Description -}}<div class="page-intro">{{ . }}</div>{{- end -}}
+    {{- with .Description -}}<p class="page-intro">{{ . }}</p>{{- end -}}
   {{- end -}}
-  <p class="page-count">共 {{ len .Data.Terms }} 个标签</p>
 </header>
 
-<ul class="tag-grid">
+<ul class="tag-list">
   {{- range .Data.Terms.ByCount -}}
     <li>
-      <a class="tag-card" href="{{ .Page.RelPermalink }}">
-        <span class="tag-card-name">#{{ .Page.LinkTitle }}</span>
-        <span class="tag-card-count">{{ .Count }} 篇</span>
+      <a href="{{ .Page.RelPermalink }}">
+        <span>#{{ .Page.LinkTitle }}</span>
+        <span class="count">{{ .Count }} 篇</span>
       </a>
     </li>
   {{- end -}}

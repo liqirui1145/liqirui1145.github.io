@@ -1,11 +1,7 @@
 {{ define "main" }}
 <section class="notfound">
-  <p class="nf-code">404</p>
-  <h1>这个页面不存在</h1>
-  <p class="muted">链接可能已经失效，或者文章还没写完。</p>
-  <p>
-    <a class="btn btn-primary" href="{{ site.Home.RelPermalink }}">回到首页</a>
-    <a class="btn ghost" href="{{ "posts/" | relURL }}">看看文章</a>
-  </p>
+  <p class="nf-code" aria-hidden="true">404</p>
+  <h1>这一页不见了。</h1>
+  <a href="{{ site.Home.RelPermalink }}">回首页</a>
 </section>
 {{ end }}

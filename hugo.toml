@@ -18,8 +18,8 @@ summaryLength = 40
 [params]
   author = "liqirui"
   description = "记录 Linux、同学和瓜那些事。"
-  # 首页的一句话介绍
-  tagline = "“生而一千年不死，死而一千年不倒，倒而一千年不朽。”"
+  # 首页的一句话：只写自己真会写的话
+  tagline = "只记能复现的坑，和那些说不清的事。"
   # 页脚年份起点
   since = 2026
 
@@ -43,14 +43,19 @@ summaryLength = 40
   weight = 1
 
 [[menus.main]]
+  name = "归档"
+  pageRef = "/archives"
+  weight = 2
+
+[[menus.main]]
   name = "标签"
   pageRef = "/tags"
-  weight = 2
+  weight = 3
 
 [[menus.main]]
   name = "关于"
   pageRef = "/about"
-  weight = 3
+  weight = 4
 
 [markup]
   [markup.goldmark]
@@ -58,7 +63,7 @@ summaryLength = 40
       # 允许在 Markdown 里直接写 HTML，写博客时方便
       unsafe = true
   [markup.highlight]
-    # 使用 class 输出，代码配色由 main.css 的 .chroma 控制，
+    # 使用 class 输出，代码配色由 main.scss 编译后的 .chroma 控制，
     # 让代码块跟随页面的 --bg-soft / --text / --accent。
     noClasses = false
     style = "monokai"

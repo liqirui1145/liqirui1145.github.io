@@ -17,15 +17,6 @@
   <script>
     (function () {
       var root = document.documentElement;
-      var header = document.getElementById("site-header");
-
-      // 滚动后页头由透明变为实底
-      function onScroll() {
-        if (!header) return;
-        header.classList.toggle("is-scrolled", window.scrollY > 16);
-      }
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
 
       // 主题切换：跟随系统 + 手动覆盖
       var btn = document.getElementById("theme-toggle");
